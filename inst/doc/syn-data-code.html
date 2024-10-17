@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>syn-data-code</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">syn-data-code</h1>
+
+
+
+<p>The purpose of this vignette is to share the code used to provide a
+walkthrough of the <code>BayesECM()</code> function in the
+<code>ezECM</code> package, as well as provide code to reproduce a
+figure from a related future publication. This document outlines the
+skeleton of a Monte Carlo experiment and provides the relevant code.
+Some parameter values are changed to reduce the computation time, the
+original values are noted in the text. Synthetic data is generated to
+use for testing and training different implementations of the Event
+Categorization Matrix (ECM) model for comparision. The comparators are
+classical ECM (C-ECM), Bayesian ECM (B-ECM) only trained on events where
+all discriminants are available, B-ECM where the model is trained on all
+available data including partial observations (M-B-ECM), and M-B-ECM
+where the loss matrix is changed such that the false negative rate is
+reduced. All of these comparators focus on binary categorization, simply
+detecting if a new observation belongs to a pre-specified important
+category. The last comparator categorizes new events into each of the
+<code>K</code> event categories used for training with the B-ECM model
+(B-ECM Cat). The current form of C-ECM cannot utilize partial
+observations for training, and therefore we hypothesize that the
+performance of C-ECM will suffer in comparision to B-ECM models which
+can utilize observations with missing data for training.</p>
+<p>First, the <code>ezECM</code> package must be loaded.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ezECM)</span></code></pre></div>
+<div id="data-generation" class="section level2">
+<h2>Data Generation</h2>
+<p>We will define some functions used to generate the synthetic data,
+which are not part of the <code>ezECM</code> package. These functions
+randomly generate a mean and covariance for each class. These random
+mean and covariance is then used to generate random data sets.
+Additionally, functions are used for randomly deleting data to generate
+partial observations. Details are provided in the comments, as well as
+the publication. The argument <code>p</code> specifies the number of
+discriminants, <code>K</code> changes the number of event categories,
+<code>Ntest</code> is the size of the testing set, <code>Ntrain</code>
+is the size of the training set which does not have any missing data,
+<code>Ntrain_missing</code> is the size of the training set where events
+have at least one missing discriminant, <code>tst_missing</code>
+controls the fraction of missing entries in the testing set, and
+accordingly <code>trn_missing</code> controls the fraction of the
+training set which is missing. In the following experiment we will only
+vary <code>p</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>data_gen <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">p =</span> <span class="cn">NULL</span>, <span class="at">K =</span> <span class="dv">3</span>, <span class="at">Ntest =</span> <span class="cn">NULL</span>, <span class="at">Ntrain =</span> <span class="cn">NULL</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                     <span class="at">Ntrain_missing =</span> <span class="cn">NULL</span>, <span class="at">tst_missing =</span> <span class="cn">NULL</span>, <span class="at">trn_missing =</span> <span class="cn">NULL</span>){</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    mu_use <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> p<span class="sc">*</span>K, <span class="at">sd =</span> <span class="fl">0.5</span>), <span class="at">ncol =</span> K, <span class="at">nrow =</span> p)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    S <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="do">## random number in each class</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    N <span class="ot">&lt;-</span> LaplacesDemon<span class="sc">::</span><span class="fu">rcat</span>(<span class="at">n =</span> Ntest <span class="sc">+</span> Ntrain <span class="sc">+</span> Ntrain_missing, </span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">times =</span> K))</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    N <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">table</span>(N))</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    <span class="do">## random very important category</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    </span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>    vic <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>K, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>K){</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>      </span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>      <span class="do">## random number of blocks in kth category</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>      </span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>      nblocks <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>      </span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>      <span class="do">## random covariance matrix for kth category</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>      </span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>      S[[k]] <span class="ot">&lt;-</span> LaplacesDemon<span class="sc">::</span><span class="fu">rinvwishart</span>(<span class="at">nu =</span> p <span class="sc">+</span> <span class="dv">4</span>, <span class="at">S =</span> <span class="fu">diag</span>(p))</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>      </span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>      </span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>      <span class="do">## If relevant, delete entries to form block covariance matrices of random sizes</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>      </span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>      <span class="cf">if</span>(nblocks <span class="sc">==</span> <span class="dv">2</span>){</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>        nblock1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>(p<span class="dv">-1</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>        block1_members <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="at">size =</span> nblock1, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>        block2_members <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span>p)[<span class="sc">-</span>block1_members]</span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>        </span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>        zero_elements <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(block1_members, block2_members)</span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>        </span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>        S[[k]][zero_elements<span class="sc">$</span>Var1, zero_elements<span class="sc">$</span>Var2] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>        S[[k]][zero_elements<span class="sc">$</span>Var2, zero_elements<span class="sc">$</span>Var1] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a>        </span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a>      }</span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a>      </span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a>      <span class="do">## data for kth class is drawn from a MVN, given the mean and covariance</span></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a>      Y[[k]] <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(LaplacesDemon<span class="sc">::</span><span class="fu">rmvn</span>(<span class="at">n =</span> N[k], <span class="at">mu =</span> mu_use[,k], <span class="at">Sigma=</span> S[[k]]))</span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a>      </span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a>      <span class="do">## data is transformed to (0,1) using the logistic function to run a check</span></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a>      Ytemp<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>Y[[k]]))</span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a>      </span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a>      <span class="do">## if machine precision causes the output of the logistic function to round to 1, the experiment is stopped</span></span>
+<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a>      <span class="do">## this has never happened</span></span>
+<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a>      <span class="cf">if</span>(<span class="fu">max</span>(<span class="fu">apply</span>(Ytemp,<span class="dv">2</span>,<span class="cf">function</span>(X){<span class="fu">range</span>(X)})) <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a>        <span class="fu">stop</span>()</span>
+<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a>      }<span class="cf">else</span>{</span>
+<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a>        Y[[k]]<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>Y[[k]]))</span>
+<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a>      }</span>
+<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a>      </span>
+<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a>      <span class="do">## a column for the event class is appended to the data.frame</span></span>
+<span id="cb2-58"><a href="#cb2-58" tabindex="-1"></a>      Y[[k]] <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Y[[k]], <span class="fu">as.character</span>(k))</span>
+<span id="cb2-59"><a href="#cb2-59" tabindex="-1"></a>      <span class="fu">names</span>(Y[[k]]) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;p&quot;</span>,<span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span>p),  <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="st">&quot;event&quot;</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" tabindex="-1"></a>      </span>
+<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a>    }</span>
+<span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a>    </span>
+<span id="cb2-63"><a href="#cb2-63" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, Y)</span>
+<span id="cb2-64"><a href="#cb2-64" tabindex="-1"></a>    </span>
+<span id="cb2-65"><a href="#cb2-65" tabindex="-1"></a>    <span class="do">## A random sample of the data is taken to be the testing set</span></span>
+<span id="cb2-66"><a href="#cb2-66" tabindex="-1"></a>    test_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Y), <span class="at">size =</span> Ntest)</span>
+<span id="cb2-67"><a href="#cb2-67" tabindex="-1"></a>    testing <span class="ot">&lt;-</span> Y[test_index,]</span>
+<span id="cb2-68"><a href="#cb2-68" tabindex="-1"></a>    </span>
+<span id="cb2-69"><a href="#cb2-69" tabindex="-1"></a>    <span class="do">## The remainder is slated for training</span></span>
+<span id="cb2-70"><a href="#cb2-70" tabindex="-1"></a>    training <span class="ot">&lt;-</span> Y[<span class="sc">-</span>test_index, ]</span>
+<span id="cb2-71"><a href="#cb2-71" tabindex="-1"></a>    </span>
+<span id="cb2-72"><a href="#cb2-72" tabindex="-1"></a>    <span class="do">## A random sample of the training set is set aside to have missing entries,</span></span>
+<span id="cb2-73"><a href="#cb2-73" tabindex="-1"></a>    <span class="do">## the remainder is set aside to be the fully observed training set</span></span>
+<span id="cb2-74"><a href="#cb2-74" tabindex="-1"></a>    train_full_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(training), <span class="at">size =</span> Ntrain)</span>
+<span id="cb2-75"><a href="#cb2-75" tabindex="-1"></a>    train_missing <span class="ot">&lt;-</span> training[<span class="sc">-</span>train_full_index, ]</span>
+<span id="cb2-76"><a href="#cb2-76" tabindex="-1"></a>    train_full <span class="ot">&lt;-</span> training[train_full_index, ]</span>
+<span id="cb2-77"><a href="#cb2-77" tabindex="-1"></a>    </span>
+<span id="cb2-78"><a href="#cb2-78" tabindex="-1"></a>    <span class="do">## If all event categories are not represented in the training set of full observations,</span></span>
+<span id="cb2-79"><a href="#cb2-79" tabindex="-1"></a>    <span class="do">## the sampling scheme repeats</span></span>
+<span id="cb2-80"><a href="#cb2-80" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">table</span>(train_full<span class="sc">$</span>event) <span class="sc">&lt;=</span> <span class="dv">1</span>) <span class="sc">|</span> <span class="fu">length</span>(<span class="fu">table</span>(train_full<span class="sc">$</span>event)) <span class="sc">&lt;=</span> (K<span class="dv">-1</span>)){</span>
+<span id="cb2-81"><a href="#cb2-81" tabindex="-1"></a>      <span class="cf">while</span>(<span class="fu">any</span>(<span class="fu">table</span>(train_full<span class="sc">$</span>event) <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">|</span> <span class="fu">length</span>(<span class="fu">table</span>(train_full<span class="sc">$</span>event)) <span class="sc">&lt;=</span> (K<span class="dv">-1</span>))){</span>
+<span id="cb2-82"><a href="#cb2-82" tabindex="-1"></a>        test_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Y), <span class="at">size =</span> Ntest)</span>
+<span id="cb2-83"><a href="#cb2-83" tabindex="-1"></a>        </span>
+<span id="cb2-84"><a href="#cb2-84" tabindex="-1"></a>        testing <span class="ot">&lt;-</span> Y[test_index,]</span>
+<span id="cb2-85"><a href="#cb2-85" tabindex="-1"></a>        training <span class="ot">&lt;-</span> Y[<span class="sc">-</span>test_index, ]</span>
+<span id="cb2-86"><a href="#cb2-86" tabindex="-1"></a>        train_full_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(training), <span class="at">size =</span> Ntrain)</span>
+<span id="cb2-87"><a href="#cb2-87" tabindex="-1"></a>        train_missing <span class="ot">&lt;-</span> training[<span class="sc">-</span>train_full_index, ]</span>
+<span id="cb2-88"><a href="#cb2-88" tabindex="-1"></a>        train_full <span class="ot">&lt;-</span> training[train_full_index, ]</span>
+<span id="cb2-89"><a href="#cb2-89" tabindex="-1"></a>      }</span>
+<span id="cb2-90"><a href="#cb2-90" tabindex="-1"></a>    }</span>
+<span id="cb2-91"><a href="#cb2-91" tabindex="-1"></a>    </span>
+<span id="cb2-92"><a href="#cb2-92" tabindex="-1"></a>    <span class="do">## the true event category for the testing set is saved as a seperate variable,</span></span>
+<span id="cb2-93"><a href="#cb2-93" tabindex="-1"></a>    <span class="do">## and deleted from the data.frame containing the data</span></span>
+<span id="cb2-94"><a href="#cb2-94" tabindex="-1"></a>    test_truth <span class="ot">&lt;-</span> testing<span class="sc">$</span>event</span>
+<span id="cb2-95"><a href="#cb2-95" tabindex="-1"></a>    testing<span class="sc">$</span>event <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-96"><a href="#cb2-96" tabindex="-1"></a>    </span>
+<span id="cb2-97"><a href="#cb2-97" tabindex="-1"></a>    <span class="do">## Entries are randomly selected for deletion from the testing set.</span></span>
+<span id="cb2-98"><a href="#cb2-98" tabindex="-1"></a>    <span class="do">## This scheme ensures a single discriminant for each observation</span></span>
+<span id="cb2-99"><a href="#cb2-99" tabindex="-1"></a>    <span class="do">## not deleted in order to reduce computation time.</span></span>
+<span id="cb2-100"><a href="#cb2-100" tabindex="-1"></a>    </span>
+<span id="cb2-101"><a href="#cb2-101" tabindex="-1"></a>    abs_present <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> Ntest, <span class="dv">1</span><span class="sc">:</span>p, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-102"><a href="#cb2-102" tabindex="-1"></a>    missing_pool <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="at">ncol =</span> p, <span class="at">nrow =</span> Ntest, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-103"><a href="#cb2-103" tabindex="-1"></a>    </span>
+<span id="cb2-104"><a href="#cb2-104" tabindex="-1"></a>    missing_pool <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(<span class="fu">cbind</span>(missing_pool, abs_present), <span class="dv">1</span>, <span class="cf">function</span>(X,pp){</span>
+<span id="cb2-105"><a href="#cb2-105" tabindex="-1"></a>      X[<span class="sc">-</span><span class="fu">c</span>(X[pp <span class="sc">+</span> <span class="dv">1</span>], pp <span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb2-106"><a href="#cb2-106" tabindex="-1"></a>    }, <span class="at">pp =</span> p))</span>
+<span id="cb2-107"><a href="#cb2-107" tabindex="-1"></a>    </span>
+<span id="cb2-108"><a href="#cb2-108" tabindex="-1"></a>    missing_pool_save <span class="ot">&lt;-</span> missing_pool</span>
+<span id="cb2-109"><a href="#cb2-109" tabindex="-1"></a>    frac_missing <span class="ot">&lt;-</span> (p<span class="sc">*</span>tst_missing)<span class="sc">/</span>(p<span class="dv">-1</span>)</span>
+<span id="cb2-110"><a href="#cb2-110" tabindex="-1"></a>    </span>
+<span id="cb2-111"><a href="#cb2-111" tabindex="-1"></a>    <span class="co"># sample which of the remaining elements will be missing</span></span>
+<span id="cb2-112"><a href="#cb2-112" tabindex="-1"></a>    missing_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">nrow</span>(missing_pool)<span class="sc">*</span><span class="fu">ncol</span>(missing_pool)), </span>
+<span id="cb2-113"><a href="#cb2-113" tabindex="-1"></a>                             <span class="at">size =</span> <span class="fu">floor</span>(<span class="fu">nrow</span>(missing_pool)<span class="sc">*</span><span class="fu">ncol</span>(missing_pool)<span class="sc">*</span>(frac_missing)), </span>
+<span id="cb2-114"><a href="#cb2-114" tabindex="-1"></a>                             <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-115"><a href="#cb2-115" tabindex="-1"></a>    </span>
+<span id="cb2-116"><a href="#cb2-116" tabindex="-1"></a>    missing_pool_save[missing_sample] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-117"><a href="#cb2-117" tabindex="-1"></a>    </span>
+<span id="cb2-118"><a href="#cb2-118" tabindex="-1"></a>    saved_data <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(missing_pool_save, <span class="fu">unname</span>(abs_present)), <span class="dv">1</span>, <span class="cf">function</span>(X){</span>
+<span id="cb2-119"><a href="#cb2-119" tabindex="-1"></a>      X[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(X))]</span>
+<span id="cb2-120"><a href="#cb2-120" tabindex="-1"></a>    })</span>
+<span id="cb2-121"><a href="#cb2-121" tabindex="-1"></a>    </span>
+<span id="cb2-122"><a href="#cb2-122" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(testing)){</span>
+<span id="cb2-123"><a href="#cb2-123" tabindex="-1"></a>      testing[j,<span class="sc">-</span><span class="fu">c</span>(saved_data[[j]])] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-124"><a href="#cb2-124" tabindex="-1"></a>    }</span>
+<span id="cb2-125"><a href="#cb2-125" tabindex="-1"></a>    </span>
+<span id="cb2-126"><a href="#cb2-126" tabindex="-1"></a>    <span class="do">## Entries are randomly selected for deletion from the training set.</span></span>
+<span id="cb2-127"><a href="#cb2-127" tabindex="-1"></a>    <span class="do">## This scheme ensures a single discriminant for each observation</span></span>
+<span id="cb2-128"><a href="#cb2-128" tabindex="-1"></a>    <span class="do">## not deleted in order to reduce computation time.</span></span>
+<span id="cb2-129"><a href="#cb2-129" tabindex="-1"></a>    </span>
+<span id="cb2-130"><a href="#cb2-130" tabindex="-1"></a>    abs_present <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> Ntrain_missing, <span class="dv">1</span><span class="sc">:</span>p, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-131"><a href="#cb2-131" tabindex="-1"></a>    abs_missing <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="at">ncol =</span> p, <span class="at">nrow =</span> Ntrain_missing, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-132"><a href="#cb2-132" tabindex="-1"></a>    </span>
+<span id="cb2-133"><a href="#cb2-133" tabindex="-1"></a>    abs_missing <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(<span class="fu">cbind</span>(abs_missing, abs_present), <span class="dv">1</span>, <span class="cf">function</span>(X,pp){</span>
+<span id="cb2-134"><a href="#cb2-134" tabindex="-1"></a>      X[<span class="sc">-</span><span class="fu">c</span>(X[pp <span class="sc">+</span> <span class="dv">1</span>], pp <span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb2-135"><a href="#cb2-135" tabindex="-1"></a>    }, <span class="at">pp =</span> p))</span>
+<span id="cb2-136"><a href="#cb2-136" tabindex="-1"></a>    </span>
+<span id="cb2-137"><a href="#cb2-137" tabindex="-1"></a>    abs_missing <span class="ot">&lt;-</span> <span class="fu">apply</span>(abs_missing, <span class="dv">1</span>, <span class="cf">function</span>(X){</span>
+<span id="cb2-138"><a href="#cb2-138" tabindex="-1"></a>      <span class="fu">sample</span>(X, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb2-139"><a href="#cb2-139" tabindex="-1"></a>    })</span>
+<span id="cb2-140"><a href="#cb2-140" tabindex="-1"></a>    </span>
+<span id="cb2-141"><a href="#cb2-141" tabindex="-1"></a>    missing_pool <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="at">ncol =</span> p, <span class="at">nrow =</span> Ntrain_missing, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-142"><a href="#cb2-142" tabindex="-1"></a>    </span>
+<span id="cb2-143"><a href="#cb2-143" tabindex="-1"></a>    missing_pool <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(<span class="fu">cbind</span>(missing_pool, abs_present, abs_missing), <span class="dv">1</span>, <span class="cf">function</span>(X,pp){</span>
+<span id="cb2-144"><a href="#cb2-144" tabindex="-1"></a>      X[<span class="sc">-</span><span class="fu">c</span>(X[pp <span class="sc">+</span> <span class="dv">1</span>], X[pp <span class="sc">+</span> <span class="dv">2</span>], pp <span class="sc">+</span><span class="dv">1</span>, pp <span class="sc">+</span> <span class="dv">2</span>)]</span>
+<span id="cb2-145"><a href="#cb2-145" tabindex="-1"></a>    }, <span class="at">pp =</span> p))</span>
+<span id="cb2-146"><a href="#cb2-146" tabindex="-1"></a>    </span>
+<span id="cb2-147"><a href="#cb2-147" tabindex="-1"></a>    missing_pool_save <span class="ot">&lt;-</span> missing_pool</span>
+<span id="cb2-148"><a href="#cb2-148" tabindex="-1"></a>    frac_missing <span class="ot">&lt;-</span> (p<span class="sc">*</span>trn_missing <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span>(p<span class="dv">-2</span>)</span>
+<span id="cb2-149"><a href="#cb2-149" tabindex="-1"></a>    </span>
+<span id="cb2-150"><a href="#cb2-150" tabindex="-1"></a>    <span class="co"># sample which of the remaining elements will be missing</span></span>
+<span id="cb2-151"><a href="#cb2-151" tabindex="-1"></a>    missing_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">nrow</span>(missing_pool)<span class="sc">*</span><span class="fu">ncol</span>(missing_pool)), <span class="at">size =</span> <span class="fu">floor</span>(<span class="fu">nrow</span>(missing_pool)<span class="sc">*</span><span class="fu">ncol</span>(missing_pool)<span class="sc">*</span>(frac_missing)), <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-152"><a href="#cb2-152" tabindex="-1"></a>    </span>
+<span id="cb2-153"><a href="#cb2-153" tabindex="-1"></a>    </span>
+<span id="cb2-154"><a href="#cb2-154" tabindex="-1"></a>    missing_pool_save[missing_sample] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-155"><a href="#cb2-155" tabindex="-1"></a>    </span>
+<span id="cb2-156"><a href="#cb2-156" tabindex="-1"></a>    saved_data <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(missing_pool_save, <span class="fu">unname</span>(abs_present)), <span class="dv">1</span>, <span class="cf">function</span>(X){</span>
+<span id="cb2-157"><a href="#cb2-157" tabindex="-1"></a>      X[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(X))]</span>
+<span id="cb2-158"><a href="#cb2-158" tabindex="-1"></a>    })</span>
+<span id="cb2-159"><a href="#cb2-159" tabindex="-1"></a>    </span>
+<span id="cb2-160"><a href="#cb2-160" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(train_missing)){</span>
+<span id="cb2-161"><a href="#cb2-161" tabindex="-1"></a>      train_missing[j,<span class="sc">-</span><span class="fu">c</span>(saved_data[[j]], p<span class="sc">+</span><span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-162"><a href="#cb2-162" tabindex="-1"></a>    }</span>
+<span id="cb2-163"><a href="#cb2-163" tabindex="-1"></a>    </span>
+<span id="cb2-164"><a href="#cb2-164" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Y =</span> <span class="fu">list</span>(<span class="at">train_full =</span> train_full, <span class="at">train_missing =</span> train_missing, </span>
+<span id="cb2-165"><a href="#cb2-165" tabindex="-1"></a>                         <span class="at">testing =</span> testing, <span class="at">test_truth =</span> test_truth), </span>
+<span id="cb2-166"><a href="#cb2-166" tabindex="-1"></a>                <span class="at">params =</span> <span class="fu">list</span>(<span class="at">mu =</span> mu_use, <span class="at">Sig =</span> S, <span class="at">vic =</span> vic)))</span>
+<span id="cb2-167"><a href="#cb2-167" tabindex="-1"></a>    </span>
+<span id="cb2-168"><a href="#cb2-168" tabindex="-1"></a>}</span></code></pre></div>
+<p>The function generates data for <code>K</code> categories, each with
+a different mean and covariance structure for a single event
+observation, drawn from a multivariate normal distribution. The
+covariance of the <code>K</code> categories each has a random chance of
+being a block-covariance matrix with blocks of random sizes, or a full
+covariance matrix. The simulated values are then transformed from real
+values to <span class="math inline">\((0,1)\)</span> using the logistic
+function. The random two block covariance is in effort to represent the
+fact that some events will have correlated observations from space and
+ground modalities, and others will have uncorrelated observations
+between the modalities with <em>random</em> sets of discriminants
+exhibiting correlations.</p>
+<p>The arguments of <code>data_gen</code> are specified for the
+experiment.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="do">## Data Parameters</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>tst_missing <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>trn_missing <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>Ntrain <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>Ntest <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>Ntrain_missing <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> Ntrain</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
+<p><code>P</code> is a vector of the values of <code>p</code> we want to
+examine. For the experiment in a forthcoming publication,
+<code>P = c(4,6,8,10)</code>. In order to reduce the computation time of
+this vignette, only values of 4 and 6 will be used.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#P &lt;- c(4,6,8,10)</span></span></code></pre></div>
+<p>The generated data will be used to train and test different
+implementations of the Event Categorization Matrix (ECM) model. The
+comparators are classical (C-ECM), Bayesian ECM (B-ECM) only trained on
+events where all discriminants are available, B-ECM where the model is
+trained on all available data including partial observations (M-B-ECM),
+M-B-ECM where the loss matrix is changed such that the false negative
+rate is reduced. All of these comparators focus on binary
+categorization, simply detecting if a new observation belongs to a
+pre-specified important category. The last comparator categorizes new
+events into each of the <code>K</code> event categories used for
+training with the B-ECM model (B-ECM Cat).</p>
+</div>
+<div id="model-and-decision-specifications" class="section level2">
+<h2>Model and Decision Specifications</h2>
+<p>All methods use typicality indices as part of the decision framework.
+For all methods, the significance level <code>alphatilde</code> is set
+to <code>0.05</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>alphatilde <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
+<p>We want to specify that for the B-ECM models, the weights of the
+components in the mixture model are informed by the data. Alternatively,
+one could change <code>mixture_weights &lt;- &quot;equal&quot;</code> for all
+components of the mixture model to have equal weight, possibly if the
+frequency of the events in the training data is unrelated to what is
+expected in practice.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mixture_weights <span class="ot">&lt;-</span> <span class="st">&quot;training&quot;</span></span></code></pre></div>
+<p>Three separate loss matrices need to be specified for the experiment.
+You may be here from the <code>becm_decision()</code> function. The
+structure of a full <code>K</code> category loss matrix is</p>
+<p><span class="math display">\[
+\begin{array}{cc@{}cc}
+    \phantom{XXX} &amp; \phantom{XXX} &amp; \phantom{XXX} &amp;
+\mathrm{Action}\\
+    \phantom{XXX} &amp; \phantom{XXX} &amp; \phantom{XXX} &amp;
+\begin{array}{cccc}
+      a_1 \phantom{X} &amp; a_2 \phantom{X} &amp; \dots &amp; a_K
+    \end{array}\\
+    C = &amp;
+        \begin{array}{c}
+        \mathrm{True}\\
+        \mathrm{Category}
+        \end{array} \hspace{-1.5em}&amp;
+        \begin{array}{c}
+        \tilde{z}_1 \\
+        \tilde{z}_2 \\
+        \vdots \\
+        \tilde{z}_K
+        \end{array} \hspace{-2em}&amp; \left[\begin{array}{c|c|c|c}
+            C_{1,1} &amp; C_{1,2} &amp; \dots &amp; C_{1, K}\\
+            \hline
+            C_{2,1} &amp; C_{2,2} &amp; \dots &amp; C_{2,K}\\
+            \hline
+            \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+            \hline
+            C_{K,1} &amp; C_{K,2} &amp; \dots &amp; C_{K, K}
+        \end{array}\right]
+\end{array}.
+\]</span> Where the losses associated with the action of categorizing a
+<span class="math inline">\(\tilde{y}_{\tilde{p}}\)</span> into one of
+the <span class="math inline">\(K\)</span> training categories is
+specified in the columns, and the value of the latent categorization
+variable <span class="math inline">\(\tilde{z}_k\)</span> for arbitrary
+category index <span class="math inline">\(k\)</span> is specified in
+the rows. If <span class="math inline">\(\tilde{Z}^{\top} = [\tilde{z}_1
+\dots \tilde{z}_K]\)</span> is known, a <span class="math inline">\(1
+\times K\)</span> row vector of losses associated with each possible
+categorization action could be calculated as the matrix vector product
+<span class="math inline">\(L_{1 \times K} = \tilde{Z}^{\top}
+C\)</span>. However, the elements of <span class="math inline">\(\tilde{Z}^{\top}\)</span> are unknown and modeled
+as random variables in the B-ECM framework. We can take the expectation
+of the loss for each action as <span class="math inline">\(\mathbb{E}[L]_{1 \times K} =
+\mathbb{E}[\tilde{Z}^{\top}]C\)</span>. The action that provides the
+minimum expected loss is probably the best bet for categorization.</p>
+<p>The above structure for the loss matrix <span class="math inline">\(C\)</span> is equivalent to what must be later
+provided to the <code>becm_decision()</code> function for full <span class="math inline">\(K\)</span> training categorization. The indices of
+the rows and columns of <span class="math inline">\(C\)</span> are the
+same order as the indices of the categories listed as
+<code>names(bayes_pred$BayesECMfit$Y)</code> for the
+<code>bayes_pred</code> argument provided to
+<code>becm_decision()</code>. The structure of <span class="math inline">\(C\)</span> differs for binary categorization
+differs in a slight, but important-to-note, way. For binary
+categorization, we want to detect if <span class="math inline">\(\tilde{y}_{\tilde{p}}\)</span> belongs to a
+specific category stipulated using the <code>vic</code> (Very Important
+Category) argument, and therefore the indexing of <span class="math inline">\(C\)</span> for full <span class="math inline">\(K\)</span> categorization does not port well to
+applications for binary categorization. In this case, the first row and
+column of <span class="math inline">\(C\)</span> always correspond to
+the category chosen as <code>vic</code>. The structure of <span class="math inline">\(C\)</span>, for <code>vic</code> indexed as <span class="math inline">\(k\)</span>, is therefore as is below.</p>
+<p><span class="math display">\[
+\begin{array}{cc@{}cc}
+\phantom{XX} &amp; \phantom{XX} &amp; \phantom{XX} &amp;
+\mathrm{Action}\\
+\phantom{XX} &amp; \phantom{XX} &amp; \phantom{XX} &amp;
+\begin{array}{cc}
+\mathrm{a}_k &amp; \mathrm{a}_{k^{-}}
+\end{array}\\
+C = &amp;
+\begin{array}{c}
+\mathrm{True}\\
+\mathrm{Category}
+\end{array} \hspace{-0.5em}&amp;
+\begin{array}{c}
+\tilde{z}_k \\
+\sum_{\substack{i = 1 \\ i \neq k}}^K \tilde{z}_i
+\end{array} \hspace{-1em}&amp; \left[\begin{array}{c|c}
+C_{1,1} &amp; C_{1,2}\\
+\hline
+C_{2,1} &amp; C_{2,2}
+\end{array}\right]
+\end{array}
+\]</span></p>
+<p>With the necessary structure of the loss matrices in mind, first we
+specify the loss matrices for B-ECM and M-B-ECM, which will utilize 0-1
+loss for binary categorization. This loss structure does not reward
+correct categorizations, but punnishes mis-categorizations with a loss
+of 1. Specifying the loss matrix accordingly as the <code>C01</code>
+variable:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>C01 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>C01</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; [1,]    0    1</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [2,]    1    0</span></span></code></pre></div>
+<p>To test M-B-ECM with a higher loss for false negatives, the
+<code>Cfneg</code> matrix variable is created. For loss matrix <span class="math inline">\(C\)</span> specified for binary categorization,
+the entry <span class="math inline">\(C_{1,2}\)</span> corresponds to
+the loss for choosing to categorize <span class="math inline">\(\tilde{y}_{\tilde{p}}\)</span> into the group of
+categories not specified by <code>vic</code> when the truth is <span class="math inline">\(\tilde{y}_{\tilde{p}}\)</span>
+<strong><em>is</em></strong> in the <code>vic</code> category. Such a
+situation is the definition of a false negative, so changing <span class="math inline">\(C\)</span> to reduce the false negative rate is
+straightforward. Similarly, <span class="math inline">\(C_{2,1}\)</span>
+could be increased relative to <span class="math inline">\(C_{1,2}\)</span> to reduce the false positive
+rate, but we will stick with the goal of reducing false negatives for
+this experiment. The loss for false negatives is increased by setting
+<code>Cfneg[1,2] &lt;- 2</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>Cfneg <span class="ot">&lt;-</span> C01</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>Cfneg[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>Cfneg</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; [1,]    0    2</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; [2,]    1    0</span></span></code></pre></div>
+<p>Because <code>K = 3</code>, a <span class="math inline">\(3 \times
+3\)</span> loss matrix needs to be specified for M-B-ECM Cat. The loss
+for any mis-categorization is specified to be equal for each
+possibility. With all non-zero values equal, using a value of 1 is
+sufficient.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>Ccat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">-</span> <span class="fu">diag</span>(<span class="dv">3</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>Ccat</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt; [1,]    0    1    1</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; [2,]    1    0    1</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; [3,]    1    1    0</span></span></code></pre></div>
+</div>
+<div id="monte-carlo-parameters" class="section level2">
+<h2>Monte Carlo Parameters</h2>
+<p>The experiment is a Monte Carlo experiment. Random data sets are
+repeatedly generated. We are interested in examining the typical
+behavior of the models, as well as the variation in behavior. Each model
+is fit to each data set and tested using a seperate testing set. The
+accuracy, false negative rate, and false positive rate for all model
+implementations are recorded for each data set generated within each
+Monte Carlo iteration. To reduce the computation time of this vignette,
+only <code>3</code> Monte Carlo iterations are generated for each total
+discriminant size specified in <code>P</code>. To replicate the figure
+and table generated for a forthcoming publication, instead set
+<code>iters &lt;- 250</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>iters <span class="ot">&lt;-</span> <span class="dv">3</span><span class="co">#250</span></span></code></pre></div>
+<p>Each model that can handle missing data utilizes Markov chain Monte
+Carlo (MCMC) to impute possible values of the missing entries within the
+training data. Then these values are integrated out when evaluating the
+expected loss for each action. MCMC occurs multiple times within each
+Monte Carlo iteration of the experiment, both concepts are not
+intertwined here. Three parameter values need to be set for MCMC. The
+two element vector <code>BT</code> first specifies the number of
+<strong>Burn-in</strong> random samples of the missing data values that
+are discgarded under the assumption that the Markov chain has not
+converged within the first <code>BT[1]</code> draws. <code>BT[2]</code>
+is the total number of MCMC iterations. After training models that can
+handle missing data, the total number of draws from the distribution of
+missing data entries will be <code>BT[1] - BT[2]</code> for each missing
+element. To reduce computation time, the values of <code>BT</code> have
+been reduced. The values <code>BT &lt; c(500,50500)</code> were used to
+compare the models in a forthcoming publication.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">## MCMC parameters</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>BT <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">2150</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#BT &lt;- c(500, 50500)</span></span></code></pre></div>
+<p>The <code>predict.BayesECM()</code> function can use all of the draws
+of the missing data values obtained, or thin the samples. Specifying
+<code>thinning &lt;- 5</code> means every fifth sample will be used,
+which reduces the computation time for prediction as well as the
+autocorrelation between draws. The default, <code>thinning = 1</code>,
+utilizes all of the samples.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>thinning <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+</div>
+<div id="the-experiment" class="section level2">
+<h2>The Experiment</h2>
+<p>We will specify a few more variables. If you are running a version of
+this experiment that is not fast to compute, we suggest setting
+<code>verb &lt;- TRUE</code>. To make this document, we set</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Experimental Parameters</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>verb <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#verb &lt;- TRUE</span></span></code></pre></div>
+<p>To save the performance metrics for each Monte Carlo iteration, a
+list <code>exp_out</code> is defined which saves the number of accurate
+categorizations, the false positive rate, and the false negative rate at
+each iteration for each value of <code>p</code>. General data, important
+for making calculations later, is also saved to <code>exp_out</code>.
+The structure of <code>exp_out</code> is built as the experiment moves
+through the different values in <code>P</code>. If
+<code>verb == TRUE</code> the time at the start of the experiment is
+saved.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="do">## Data structures for saving progress</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>cECM_recfp <span class="ot">&lt;-</span> cECM_recfn <span class="ot">&lt;-</span> bayes_rec <span class="ot">&lt;-</span> cECM_rec <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="fu">length</span>(P), <span class="at">nrow =</span> iters)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>Nvic <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> <span class="fu">length</span>(P))</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>exp_out <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>method_template <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> iters))</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="fu">names</span>(method_template) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;accurate&quot;</span>, <span class="st">&quot;FN&quot;</span>, <span class="st">&quot;FP&quot;</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>data_template <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> iters))</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="fu">names</span>(data_template) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ntest&quot;</span>, <span class="st">&quot;Nvic&quot;</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>data_template<span class="sc">$</span>Ntest <span class="ot">&lt;-</span> Ntest</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>p_template <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">cECM =</span> method_template, <span class="at">becm =</span> method_template, </span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>                   <span class="at">mbecm =</span> method_template, <span class="at">mbecm_Cfn =</span> method_template, </span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>                   <span class="at">mbecm_cat =</span> method_template, <span class="at">data =</span> data_template)</span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>bayes_rec <span class="ot">&lt;-</span> cECM_rec <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="fu">length</span>(P), <span class="at">nrow =</span> iters)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="cf">if</span>(verb){</span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>toc <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>Then, the experiment iterates over the values of <code>P</code> and
+then the number of Monte Carlo iterations for each setting of
+<code>p</code>. Because the experiment is in a for loop, detailed
+descriptions are in the comments.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## Iterates over the differing numbers of total discriminants set for the experiment.</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> P){</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  </span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  <span class="do">## Builds the list for saving the results using a template list</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  exp_out[[p]] <span class="ot">&lt;-</span> p_template</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  <span class="do">## Runs each model for `iters` number of independent data sets.</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iters){</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>    <span class="do">## The i^{th} run for p discriminants</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>    <span class="cf">if</span>(verb){    </span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>      <span class="do">## set the experimental parameter verb &lt;- TRUE to print progress</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;i = &quot;</span>, i, <span class="st">&quot;, p = &quot;</span>, p, <span class="st">&quot;, &quot;</span>, <span class="fu">round</span>(<span class="fu">Sys.time</span>() <span class="sc">-</span> toc, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">&quot; &quot;</span>, <span class="fu">units</span>(<span class="fu">Sys.time</span>() <span class="sc">-</span> toc), <span class="st">&quot; elapsed&quot;</span>))</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>    }</span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>    </span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>    <span class="do">## Generate random data set</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>    </span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>      Ylist <span class="ot">&lt;-</span> <span class="fu">data_gen</span>(<span class="at">p =</span> p, <span class="at">K =</span> K, <span class="at">Ntest =</span> Ntest, <span class="at">Ntrain =</span> Ntrain, </span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>                     <span class="at">Ntrain_missing =</span> Ntrain_missing, <span class="at">tst_missing =</span> tst_missing, </span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>                    <span class="at">trn_missing =</span> trn_missing)</span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>      </span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>      <span class="do">## Saves the random data information to the environment</span></span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>      </span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a>      train_full<span class="ot">&lt;-</span> Ylist<span class="sc">$</span>Y<span class="sc">$</span>train_full</span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a>      train_missing <span class="ot">&lt;-</span> Ylist<span class="sc">$</span>Y<span class="sc">$</span>train_missing</span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a>      testing <span class="ot">&lt;-</span> Ylist<span class="sc">$</span>Y<span class="sc">$</span>testing</span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a>      test_truth <span class="ot">&lt;-</span> Ylist<span class="sc">$</span>Y<span class="sc">$</span>test_truth</span>
+<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a>      <span class="do">## Which category is the important one this time?</span></span>
+<span id="cb15-28"><a href="#cb15-28" tabindex="-1"></a>      vic <span class="ot">&lt;-</span> Ylist<span class="sc">$</span>params<span class="sc">$</span>vic</span>
+<span id="cb15-29"><a href="#cb15-29" tabindex="-1"></a>    </span>
+<span id="cb15-30"><a href="#cb15-30" tabindex="-1"></a>    </span>
+<span id="cb15-31"><a href="#cb15-31" tabindex="-1"></a>    <span class="do">## Save the true total number of `vic` events in the testing data to be used</span></span>
+<span id="cb15-32"><a href="#cb15-32" tabindex="-1"></a>    <span class="do">## later for analyzing performance.</span></span>
+<span id="cb15-33"><a href="#cb15-33" tabindex="-1"></a>    </span>
+<span id="cb15-34"><a href="#cb15-34" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;data&quot;</span>]]<span class="sc">$</span>Nvic[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(test_truth <span class="sc">==</span> <span class="fu">as.character</span>(vic))</span>
+<span id="cb15-35"><a href="#cb15-35" tabindex="-1"></a>    </span>
+<span id="cb15-36"><a href="#cb15-36" tabindex="-1"></a>    <span class="do">## Fit the classical ECM model, apply the decision framework with the</span></span>
+<span id="cb15-37"><a href="#cb15-37" tabindex="-1"></a>    <span class="do">## `cECM_decision()` function, then save the results</span></span>
+<span id="cb15-38"><a href="#cb15-38" tabindex="-1"></a>    </span>
+<span id="cb15-39"><a href="#cb15-39" tabindex="-1"></a>    cECM <span class="ot">&lt;-</span> <span class="fu">cECM</span>(<span class="at">x =</span> train_full, <span class="at">transform =</span> <span class="cn">TRUE</span>, <span class="at">newdata =</span> testing)</span>
+<span id="cb15-40"><a href="#cb15-40" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" tabindex="-1"></a>    cECM_out <span class="ot">&lt;-</span>  <span class="fu">apply</span>(<span class="fu">cECM_decision</span>(<span class="at">pval =</span> cECM, <span class="at">alphatilde =</span> alphatilde,</span>
+<span id="cb15-42"><a href="#cb15-42" tabindex="-1"></a>                                 <span class="at">vic =</span> <span class="fu">as.character</span>(vic), </span>
+<span id="cb15-43"><a href="#cb15-43" tabindex="-1"></a>                                 <span class="at">cat_truth =</span> test_truth)<span class="sc">$</span>events[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] ,<span class="dv">2</span>, </span>
+<span id="cb15-44"><a href="#cb15-44" tabindex="-1"></a>                       sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-45"><a href="#cb15-45" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;cECM&quot;</span>]][i,] <span class="ot">&lt;-</span> <span class="fu">unname</span>(cECM_out)</span>
+<span id="cb15-47"><a href="#cb15-47" tabindex="-1"></a>    </span>
+<span id="cb15-48"><a href="#cb15-48" tabindex="-1"></a>    <span class="do">## Fit the B-ECM model, using only full p observations</span></span>
+<span id="cb15-49"><a href="#cb15-49" tabindex="-1"></a>    </span>
+<span id="cb15-50"><a href="#cb15-50" tabindex="-1"></a>    bayes_fit <span class="ot">&lt;-</span> <span class="fu">BayesECM</span>(<span class="at">Y =</span> train_full)</span>
+<span id="cb15-51"><a href="#cb15-51" tabindex="-1"></a>    </span>
+<span id="cb15-52"><a href="#cb15-52" tabindex="-1"></a>    <span class="do">## Run the predict function on the testing set.</span></span>
+<span id="cb15-53"><a href="#cb15-53" tabindex="-1"></a>    <span class="do">## If there were multiple testing sets, the same model fit could be used on</span></span>
+<span id="cb15-54"><a href="#cb15-54" tabindex="-1"></a>    <span class="do">## each one without having to rerun the `BayesECM()` function.  This</span></span>
+<span id="cb15-55"><a href="#cb15-55" tabindex="-1"></a>    <span class="do">## functionality is more important when using training data with missing</span></span>
+<span id="cb15-56"><a href="#cb15-56" tabindex="-1"></a>    <span class="do">## entries.</span></span>
+<span id="cb15-57"><a href="#cb15-57" tabindex="-1"></a>    </span>
+<span id="cb15-58"><a href="#cb15-58" tabindex="-1"></a>    bayes_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bayes_fit, <span class="at">Ytilde =</span> testing, </span>
+<span id="cb15-59"><a href="#cb15-59" tabindex="-1"></a>                          <span class="at">mixture_weights =</span> mixture_weights)</span>
+<span id="cb15-60"><a href="#cb15-60" tabindex="-1"></a>    </span>
+<span id="cb15-61"><a href="#cb15-61" tabindex="-1"></a>    <span class="do">## The &quot;becm_desision()&quot; function applies the decision theoretic framework</span></span>
+<span id="cb15-62"><a href="#cb15-62" tabindex="-1"></a>    <span class="do">## to the training and testing data.  For one training and one testing set,</span></span>
+<span id="cb15-63"><a href="#cb15-63" tabindex="-1"></a>    <span class="do">## where the user wants to try different values of `alphatilde` and `C`, it is</span></span>
+<span id="cb15-64"><a href="#cb15-64" tabindex="-1"></a>    <span class="do">## not necessary to rerun the `BayesECM()` function or the `predict()`</span></span>
+<span id="cb15-65"><a href="#cb15-65" tabindex="-1"></a>    <span class="do">## function.</span></span>
+<span id="cb15-66"><a href="#cb15-66" tabindex="-1"></a>    </span>
+<span id="cb15-67"><a href="#cb15-67" tabindex="-1"></a>    becm_out <span class="ot">&lt;-</span> <span class="fu">becm_decision</span>(<span class="at">bayes_pred =</span> bayes_pred, <span class="at">alphatilde =</span> alphatilde,</span>
+<span id="cb15-68"><a href="#cb15-68" tabindex="-1"></a>                                <span class="at">vic =</span> <span class="fu">as.character</span>(vic), <span class="at">cat_truth =</span> test_truth, </span>
+<span id="cb15-69"><a href="#cb15-69" tabindex="-1"></a>                              <span class="at">pn =</span> <span class="cn">TRUE</span>, <span class="at">C =</span> C01)</span>
+<span id="cb15-70"><a href="#cb15-70" tabindex="-1"></a>    </span>
+<span id="cb15-71"><a href="#cb15-71" tabindex="-1"></a>    <span class="do">## Summarize and save the data.</span></span>
+<span id="cb15-72"><a href="#cb15-72" tabindex="-1"></a>    </span>
+<span id="cb15-73"><a href="#cb15-73" tabindex="-1"></a>    becm_out <span class="ot">&lt;-</span> <span class="fu">apply</span>(becm_out<span class="sc">$</span>results,<span class="dv">2</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-74"><a href="#cb15-74" tabindex="-1"></a>    </span>
+<span id="cb15-75"><a href="#cb15-75" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;becm&quot;</span>]][i,] <span class="ot">&lt;-</span> <span class="fu">unname</span>(becm_out)</span>
+<span id="cb15-76"><a href="#cb15-76" tabindex="-1"></a>    </span>
+<span id="cb15-77"><a href="#cb15-77" tabindex="-1"></a>    </span>
+<span id="cb15-78"><a href="#cb15-78" tabindex="-1"></a>    <span class="do">## Fit and save the B-ECM model that includes missing data</span></span>
+<span id="cb15-79"><a href="#cb15-79" tabindex="-1"></a>    </span>
+<span id="cb15-80"><a href="#cb15-80" tabindex="-1"></a>    bayes_fit_missing <span class="ot">&lt;-</span> <span class="fu">BayesECM</span>(<span class="at">Y =</span> <span class="fu">rbind</span>(train_full, train_missing), <span class="at">BT =</span> BT, </span>
+<span id="cb15-81"><a href="#cb15-81" tabindex="-1"></a>                                  <span class="at">verb =</span> verb)</span>
+<span id="cb15-82"><a href="#cb15-82" tabindex="-1"></a>    </span>
+<span id="cb15-83"><a href="#cb15-83" tabindex="-1"></a>    bayes_pred_missing <span class="ot">&lt;-</span> <span class="fu">predict</span>(bayes_fit_missing, <span class="at">Ytilde =</span> testing, </span>
+<span id="cb15-84"><a href="#cb15-84" tabindex="-1"></a>                                  <span class="at">thinning =</span> thinning, </span>
+<span id="cb15-85"><a href="#cb15-85" tabindex="-1"></a>                                  <span class="at">mixture_weights =</span> mixture_weights)</span>
+<span id="cb15-86"><a href="#cb15-86" tabindex="-1"></a>    </span>
+<span id="cb15-87"><a href="#cb15-87" tabindex="-1"></a>    missing_out <span class="ot">&lt;-</span> <span class="fu">becm_decision</span>(<span class="at">bayes_pred =</span> bayes_pred_missing, <span class="at">alphatilde =</span> alphatilde,</span>
+<span id="cb15-88"><a href="#cb15-88" tabindex="-1"></a>                             <span class="at">vic =</span> <span class="fu">as.character</span>(vic), <span class="at">cat_truth =</span> test_truth, </span>
+<span id="cb15-89"><a href="#cb15-89" tabindex="-1"></a>                             <span class="at">pn =</span> <span class="cn">TRUE</span>, <span class="at">C =</span> C01)</span>
+<span id="cb15-90"><a href="#cb15-90" tabindex="-1"></a>    mbecm_out <span class="ot">&lt;-</span> <span class="fu">apply</span>(missing_out<span class="sc">$</span>results,<span class="dv">2</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-91"><a href="#cb15-91" tabindex="-1"></a>    </span>
+<span id="cb15-92"><a href="#cb15-92" tabindex="-1"></a>    </span>
+<span id="cb15-93"><a href="#cb15-93" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;mbecm&quot;</span>]][i,] <span class="ot">&lt;-</span> <span class="fu">unname</span>(mbecm_out)</span>
+<span id="cb15-94"><a href="#cb15-94" tabindex="-1"></a>    </span>
+<span id="cb15-95"><a href="#cb15-95" tabindex="-1"></a>    <span class="do">## The rest of the B-ECM variants are different through decision theory,</span></span>
+<span id="cb15-96"><a href="#cb15-96" tabindex="-1"></a>    <span class="do">## not the model fit.  All use partial observations for training.</span></span>
+<span id="cb15-97"><a href="#cb15-97" tabindex="-1"></a>    <span class="do">## Note that the rej argument is supplied to becm_decision to reduce computation time</span></span>
+<span id="cb15-98"><a href="#cb15-98" tabindex="-1"></a>    </span>
+<span id="cb15-99"><a href="#cb15-99" tabindex="-1"></a>    <span class="do">## Record the decision when the loss matrix is adjusted to target</span></span>
+<span id="cb15-100"><a href="#cb15-100" tabindex="-1"></a>    <span class="do">## false negatives.</span></span>
+<span id="cb15-101"><a href="#cb15-101" tabindex="-1"></a>    </span>
+<span id="cb15-102"><a href="#cb15-102" tabindex="-1"></a>    Cfn_out <span class="ot">&lt;-</span> <span class="fu">becm_decision</span>(<span class="at">bayes_pred =</span> bayes_pred_missing, <span class="at">alphatilde =</span> alphatilde,</span>
+<span id="cb15-103"><a href="#cb15-103" tabindex="-1"></a>                         <span class="at">vic =</span> <span class="fu">as.character</span>(vic), <span class="at">cat_truth =</span> test_truth, </span>
+<span id="cb15-104"><a href="#cb15-104" tabindex="-1"></a>                         <span class="at">pn =</span> <span class="cn">TRUE</span>, <span class="at">C =</span> Cfneg, <span class="at">rej =</span> missing_out<span class="sc">$</span>rej)</span>
+<span id="cb15-105"><a href="#cb15-105" tabindex="-1"></a>    becm_Cfn_out <span class="ot">&lt;-</span> <span class="fu">apply</span>(Cfn_out<span class="sc">$</span>results,<span class="dv">2</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-106"><a href="#cb15-106" tabindex="-1"></a>    </span>
+<span id="cb15-107"><a href="#cb15-107" tabindex="-1"></a>    </span>
+<span id="cb15-108"><a href="#cb15-108" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;mbecm_Cfn&quot;</span>]][i,] <span class="ot">&lt;-</span> <span class="fu">unname</span>(becm_Cfn_out)</span>
+<span id="cb15-109"><a href="#cb15-109" tabindex="-1"></a>    </span>
+<span id="cb15-110"><a href="#cb15-110" tabindex="-1"></a>    <span class="do">## Record the decisions when full class (K = 3) categorization is used</span></span>
+<span id="cb15-111"><a href="#cb15-111" tabindex="-1"></a>    <span class="do">## instead of binary categorization</span></span>
+<span id="cb15-112"><a href="#cb15-112" tabindex="-1"></a>    </span>
+<span id="cb15-113"><a href="#cb15-113" tabindex="-1"></a>    cat_out <span class="ot">&lt;-</span>  <span class="fu">becm_decision</span>(<span class="at">bayes_pred =</span> bayes_pred_missing, <span class="at">alphatilde =</span> alphatilde,</span>
+<span id="cb15-114"><a href="#cb15-114" tabindex="-1"></a>                          <span class="at">vic =</span> <span class="fu">as.character</span>(vic), <span class="at">cat_truth =</span> test_truth, </span>
+<span id="cb15-115"><a href="#cb15-115" tabindex="-1"></a>                          <span class="at">pn =</span> <span class="cn">TRUE</span>, <span class="at">C =</span> Ccat, <span class="at">rej =</span> missing_out<span class="sc">$</span>rej)</span>
+<span id="cb15-116"><a href="#cb15-116" tabindex="-1"></a>    becm_cat_out <span class="ot">&lt;-</span> <span class="fu">apply</span>(cat_out<span class="sc">$</span>results,<span class="dv">2</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-117"><a href="#cb15-117" tabindex="-1"></a>    </span>
+<span id="cb15-118"><a href="#cb15-118" tabindex="-1"></a>    </span>
+<span id="cb15-119"><a href="#cb15-119" tabindex="-1"></a>    exp_out[[p]][[<span class="st">&quot;mbecm_cat&quot;</span>]][i,] <span class="ot">&lt;-</span> <span class="fu">unname</span>(becm_cat_out)</span>
+<span id="cb15-120"><a href="#cb15-120" tabindex="-1"></a></span>
+<span id="cb15-121"><a href="#cb15-121" tabindex="-1"></a>    </span>
+<span id="cb15-122"><a href="#cb15-122" tabindex="-1"></a>  }</span>
+<span id="cb15-123"><a href="#cb15-123" tabindex="-1"></a>  </span>
+<span id="cb15-124"><a href="#cb15-124" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="plotting-the-results" class="section level2">
+<h2>Plotting the Results</h2>
+<p>First a function for making the boxplot is defined. The output from
+the experiment is the first argument. The user can subset the number of
+discriminant compared with the <code>P</code> argument, and models
+compared with the <code>models</code> argument. A different color
+palette can be supplied if desired using <code>cols</code>. The
+<code>legend_text</code> can also be altered, and should be if the user
+does not want to plot all of the models compared.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>ECM_boxplot <span class="ot">&lt;-</span> <span class="cf">function</span>(exp_out, <span class="at">P =</span> P, <span class="at">models =</span> <span class="fu">c</span>(<span class="st">&quot;cECM&quot;</span>, <span class="st">&quot;becm&quot;</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>                                                   <span class="st">&quot;mbecm&quot;</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>                                                   <span class="st">&quot;mbecm_Cfn&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>                                                   <span class="st">&quot;mbecm_cat&quot;</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>                        <span class="at">cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>                        <span class="at">legend_text =</span>  <span class="fu">c</span>(<span class="st">&quot;C-ECM&quot;</span>, <span class="st">&quot;B-ECM&quot;</span>, <span class="st">&quot;M-B-ECM&quot;</span>, </span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>                  <span class="fu">bquote</span>(<span class="st">&quot;M-B-ECM, &quot;</span> <span class="sc">*</span> C[<span class="st">&quot;1,2&quot;</span>] <span class="sc">==</span> <span class="dv">2</span>), <span class="st">&quot;M-B-ECM Cat&quot;</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>                  <span class="at">metric =</span> <span class="st">&quot;accurate&quot;</span>){</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>  <span class="cf">if</span>(metric <span class="sc">==</span> <span class="st">&quot;accurate&quot;</span>){</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>    divisor <span class="ot">&lt;-</span> <span class="cf">function</span>(exp_out, p){</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>      <span class="fu">return</span>(exp_out[[p]]<span class="sc">$</span>data<span class="sc">$</span>Ntest)</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>    }</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>    ylab <span class="ot">&lt;-</span> <span class="st">&quot;Model Accuracy&quot;</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(metric <span class="sc">==</span> <span class="st">&quot;FN&quot;</span>){</span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>    divisor <span class="ot">&lt;-</span> <span class="cf">function</span>(exp_out,p){</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>      <span class="fu">return</span>(exp_out[[p]]<span class="sc">$</span>data<span class="sc">$</span>Nvic)</span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>    }</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>    ylab <span class="ot">&lt;-</span> <span class="st">&quot;False Negative Rate&quot;</span></span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(metric <span class="sc">==</span> <span class="st">&quot;FP&quot;</span>){</span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a>    divisor <span class="ot">&lt;-</span> <span class="cf">function</span>(exp_out, p){</span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a>      <span class="fu">return</span>(exp_out[[p]]<span class="sc">$</span>data<span class="sc">$</span>Ntest <span class="sc">-</span> exp_out[[p]]<span class="sc">$</span>data<span class="sc">$</span>Nvic)</span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>    }</span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>    ylab <span class="ot">&lt;-</span> <span class="st">&quot;False Positive Rate&quot;</span></span>
+<span id="cb16-26"><a href="#cb16-26" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb16-27"><a href="#cb16-27" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Argument &#39;metric&#39; must be one of the following case sensitive character strings: &#39;accurate&#39;, &#39;FN&#39;, or &#39;FP&#39;.&quot;</span>)</span>
+<span id="cb16-28"><a href="#cb16-28" tabindex="-1"></a>  }</span>
+<span id="cb16-29"><a href="#cb16-29" tabindex="-1"></a>   boxplotdf <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;cbind&quot;</span>, <span class="fu">lapply</span>(exp_out[[P[<span class="dv">1</span>]]][models], <span class="cf">function</span>(X, <span class="at">m =</span> metric){</span>
+<span id="cb16-30"><a href="#cb16-30" tabindex="-1"></a>  X[[m]]</span>
+<span id="cb16-31"><a href="#cb16-31" tabindex="-1"></a>}))<span class="sc">/</span><span class="fu">divisor</span>(exp_out, <span class="at">p =</span> P[<span class="dv">1</span>])</span>
+<span id="cb16-32"><a href="#cb16-32" tabindex="-1"></a>  </span>
+<span id="cb16-33"><a href="#cb16-33" tabindex="-1"></a>   </span>
+<span id="cb16-34"><a href="#cb16-34" tabindex="-1"></a>  <span class="cf">for</span>(p <span class="cf">in</span> P[<span class="sc">-</span><span class="dv">1</span>]){</span>
+<span id="cb16-35"><a href="#cb16-35" tabindex="-1"></a>  boxplotdf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(boxplotdf,<span class="fu">do.call</span>(<span class="st">&quot;cbind&quot;</span>, <span class="fu">lapply</span>(exp_out[[p]][models], <span class="cf">function</span>(X, <span class="at">m =</span> metric){</span>
+<span id="cb16-36"><a href="#cb16-36" tabindex="-1"></a>  X[[m]]</span>
+<span id="cb16-37"><a href="#cb16-37" tabindex="-1"></a>}))<span class="sc">/</span><span class="fu">divisor</span>(exp_out, <span class="at">p =</span> p))</span>
+<span id="cb16-38"><a href="#cb16-38" tabindex="-1"></a>  }</span>
+<span id="cb16-39"><a href="#cb16-39" tabindex="-1"></a>  </span>
+<span id="cb16-40"><a href="#cb16-40" tabindex="-1"></a>   boxplotdf <span class="ot">&lt;-</span> boxplotdf</span>
+<span id="cb16-41"><a href="#cb16-41" tabindex="-1"></a>   </span>
+<span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a>   <span class="cf">if</span>(<span class="fu">max</span>(boxplotdf) <span class="sc">&gt;</span> <span class="dv">65</span>){</span>
+<span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a>     ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(boxplotdf), <span class="fl">1.1</span>)</span>
+<span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a>   }<span class="cf">else</span>{</span>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">range</span>(boxplotdf) <span class="sc">*</span> <span class="fu">c</span>(<span class="fl">0.9</span>,<span class="fl">1.2</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" tabindex="-1"></a>   }</span>
+<span id="cb16-47"><a href="#cb16-47" tabindex="-1"></a>   </span>
+<span id="cb16-48"><a href="#cb16-48" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">is.null</span>(cols)){</span>
+<span id="cb16-50"><a href="#cb16-50" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(models) <span class="sc">==</span> <span class="dv">5</span>){</span>
+<span id="cb16-51"><a href="#cb16-51" tabindex="-1"></a>pltcols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="dv">44</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>, <span class="at">rev =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">37</span>)]</span>
+<span id="cb16-52"><a href="#cb16-52" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">length</span>(models) <span class="sc">&gt;</span> <span class="dv">10</span>){</span>
+<span id="cb16-53"><a href="#cb16-53" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">&quot;You should consider recoding this function with a different way to select the colors used for the plot.&quot;</span>)</span>
+<span id="cb16-54"><a href="#cb16-54" tabindex="-1"></a>  pltcols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="dv">44</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>, <span class="at">rev =</span> <span class="cn">TRUE</span>)[<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">38</span>, <span class="at">length.out =</span> <span class="fu">length</span>(models))]</span>
+<span id="cb16-55"><a href="#cb16-55" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb16-56"><a href="#cb16-56" tabindex="-1"></a>  pltcols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="dv">44</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>, <span class="at">rev =</span> <span class="cn">TRUE</span>)[<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">38</span>, <span class="at">length.out =</span> <span class="fu">length</span>(models))]</span>
+<span id="cb16-57"><a href="#cb16-57" tabindex="-1"></a>}</span>
+<span id="cb16-58"><a href="#cb16-58" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb16-59"><a href="#cb16-59" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(cols) <span class="sc">!=</span> <span class="fu">length</span>(models)){</span>
+<span id="cb16-60"><a href="#cb16-60" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;If supplying colors, a vector the same length as the &#39;models&#39; argument must be used.&quot;</span>)</span>
+<span id="cb16-61"><a href="#cb16-61" tabindex="-1"></a>  }</span>
+<span id="cb16-62"><a href="#cb16-62" tabindex="-1"></a>}</span>
+<span id="cb16-63"><a href="#cb16-63" tabindex="-1"></a>   </span>
+<span id="cb16-64"><a href="#cb16-64" tabindex="-1"></a>opar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-65"><a href="#cb16-65" tabindex="-1"></a><span class="fu">on.exit</span>(<span class="at">expr =</span> <span class="fu">suppressWarnings</span>(<span class="fu">par</span>(opar)))</span>
+<span id="cb16-66"><a href="#cb16-66" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.25</span>,<span class="fl">3.85</span>,<span class="dv">1</span>,<span class="fl">0.5</span>))</span>
+<span id="cb16-67"><a href="#cb16-67" tabindex="-1"></a>lmodels <span class="ot">&lt;-</span> <span class="fu">length</span>(models)</span>
+<span id="cb16-68"><a href="#cb16-68" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">boxplot</span>(boxplotdf,  </span>
+<span id="cb16-69"><a href="#cb16-69" tabindex="-1"></a>                  <span class="at">at =</span> (<span class="dv">1</span><span class="sc">:</span>((lmodels <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">*</span><span class="fu">length</span>(P)))[<span class="sc">-</span><span class="fu">seq</span>(<span class="at">from =</span> lmodels <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb16-70"><a href="#cb16-70" tabindex="-1"></a>                                                          <span class="at">to =</span> <span class="fu">length</span>(P)<span class="sc">*</span>(lmodels <span class="sc">+</span> <span class="dv">1</span>), </span>
+<span id="cb16-71"><a href="#cb16-71" tabindex="-1"></a>                                                          <span class="at">by =</span> lmodels <span class="sc">+</span> <span class="dv">1</span>)],</span>
+<span id="cb16-72"><a href="#cb16-72" tabindex="-1"></a>         <span class="at">xaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="at">yaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> ylim, </span>
+<span id="cb16-73"><a href="#cb16-73" tabindex="-1"></a>        <span class="at">col =</span> pltcols, <span class="at">xlab =</span> <span class="st">&quot;Number of Discriminants&quot;</span>, <span class="at">ylab =</span> ylab)</span>
+<span id="cb16-74"><a href="#cb16-74" tabindex="-1"></a>py <span class="ot">&lt;-</span> <span class="fu">pretty</span>(boxplotdf)</span>
+<span id="cb16-75"><a href="#cb16-75" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">axis</span>(<span class="dv">2</span>, py)</span>
+<span id="cb16-76"><a href="#cb16-76" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="fu">length</span>(P)<span class="sc">*</span>(lmodels <span class="sc">+</span> <span class="dv">1</span>), <span class="at">by =</span> lmodels <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb16-77"><a href="#cb16-77" tabindex="-1"></a>               <span class="at">labels =</span>  <span class="fu">paste0</span>(<span class="st">&quot;p = &quot;</span>, P) )</span>
+<span id="cb16-78"><a href="#cb16-78" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">bty =</span><span class="st">&quot;n&quot;</span>, </span>
+<span id="cb16-79"><a href="#cb16-79" tabindex="-1"></a>       <span class="at">legend =</span> legend_text,  </span>
+<span id="cb16-80"><a href="#cb16-80" tabindex="-1"></a>       <span class="at">fill =</span> pltcols, <span class="at">horiz =</span> <span class="cn">FALSE</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">y.intersp =</span> <span class="fl">1.25</span>)</span>
+<span id="cb16-81"><a href="#cb16-81" tabindex="-1"></a>}</span></code></pre></div>
+<p>Then, using the function with all of the data on overall accuracy
+collected.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">ECM_boxplot</span>(<span class="at">exp_out =</span> exp_out, <span class="at">P =</span> P, <span class="at">metric =</span> <span class="st">&quot;accurate&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>If it is desirable to instead plot false negatives or false
+positives, the argument <code>metric</code> can be set to
+<code>&quot;FN&quot;</code> and <code>&quot;FP&quot;</code> respectively.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">ECM_boxplot</span>(<span class="at">exp_out =</span> exp_out, <span class="at">P =</span> P, <span class="at">metric =</span> <span class="st">&quot;FN&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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uVWMACPgFQFbM6Bq1arRL7/84rXx6sLq1avpoYceUqd8ZAQYgTBBwNZLsNatWxOY0Pnz56lNmzZSxgMBdNKkSaUm7MSJEzR79mxavHgxYZnGxAgwAuGFgK0ZULly5Wj37t30yiuvUPv27SkmJsaA7lNPPUXLly+nGjVqGK5xAiPACNgbAVszIEBXqFAhqeGCT55Tp04RZj3Y7p87d27KkyePVMnbG+KEa93du3fl7BHL04iI4A81bLRgqwVTCSZGwB8Egv9U+tMKP/LABgjMCH+e9Pfff8sXLFWqVJ6XYj2Pjo6Who2xZhIXr127Fmdbo2+++Yb27dvnqwp5PVu2bAFx+TFmzBhauHAhbdu2je7duyftp9q2bUsff/wxZcyYMda21KlTJ9bl7Ouvv07QTiq6dOkSvfPOO7R+/Xo6cOCATMbH4e2336Zu3bqpbARtJfLBfguMCsoDT6pZsyatW7dOthP2XUyhRQAf+WHDhvldKZ4VmMnEh8KGAcXWSXheAxjz5s2LLZvh2uHDh+l///ufId0zAS/MoUOH6M033/S8FOs5lo+tWrWinr0yxZpPXRw8+CplzZpV3qPSrB7feustGjduHHXq1Em2F7ORn3/+WaaB4c6YMcNnkWDygwcPNs1XrFgxPf369etUr149whFL5Pr168sZ19dffy0ZKYxHn376aT0/7LnwsYDSAPe5EuR8GzdudE3i3yFGoFffPjR56hRKXbeqz5q16AfyGfHH6VhshSUKBtSjRw8qXLhwbP00vVa8eHE6e/as6TXXxNKlS0t7JNc0f38XK56ZevaOfdahyjp2LIX6GafjF198QR9++CGNHz+egImiihUrymURZiRgiGAUsRGY4AsvvBBbFnntueeek4x5586dbjNTeI6EBXvXrl1p7969lD59epk/WbJkVKVKFfruu+8MDAgztkcffZS2b9/us17OEBwEMCtN3bgGpa7nBwO6H01RK7bEuyGJggF5+1rHG50wKwAvceXKlU2XcWAGWI7lzJkzIL26ceOGnMmMHDnSjfmowj///HNddqfScATTApOcNGmS1Gaqa7Bob968OTMgBYhDjra2A3LIGASsm5g9YIaBpY4nwXShT58+BM1iIOi3336TAueqVc2/lkWKFKFXX31VLild62vWrJlcpv366696MuRIkP2AATE5CwFmQIlkvLFvDi8y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" /><!-- --></p>
+<p>It is likely that without any changes to the code the plots above can
+look quite different. Using the commented out values for the variables
+<code>P</code>, <code>iters</code>, and <code>BT</code> will help, but
+the computation time for the full experiment is a few days.
+Alternatively, we have a hunch the settings <code>iters &lt;- 50</code>,
+<code>BT &lt;- c(500, 20500)</code>, and <code>thinning &lt;- 2</code>
+to provide a good compromise between computation time and Monte Carlo
+variance. Additionally, larger values in the vector <code>P</code> have
+a longer computation time, so the larger values can be removed or added
+as seen fit.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
